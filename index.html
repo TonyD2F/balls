@@ -1,0 +1,405 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>balls — OpenCode Configuration Report</title>
+<meta name="description" content="A detailed audit of the OpenCode configuration loaded by this project.">
+<style>
+:root{--bg:#070a11;--panel:rgba(15,21,34,.78);--text:#e7eefb;--muted:#9aa8c0;--accent:#5eead4;--accent2:#818cf8;--border:#1e2a3e}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;color:var(--text);line-height:1.65;font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:radial-gradient(1100px 560px at 8% -10%,rgba(94,234,212,.14),transparent 60%),radial-gradient(900px 520px at 92% 0%,rgba(129,140,248,.16),transparent 58%),var(--bg)}
+.orb{position:fixed;border-radius:50%;filter:blur(70px);opacity:.3;pointer-events:none;z-index:0;animation:float 18s ease-in-out infinite}
+.hero{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:76px 24px 42px}
+.eyebrow{color:var(--accent);text-transform:uppercase;letter-spacing:.2em;font-size:12px;font-weight:700}
+h1{font-size:clamp(34px,5.4vw,60px);line-height:1.05;letter-spacing:-.035em;margin:12px 0 18px;max-width:900px}
+.lede{color:var(--muted);font-size:18px;max-width:760px;margin:0}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px}
+.chip{border:1px solid var(--border);background:rgba(255,255,255,.03);color:var(--muted);padding:6px 11px;border-radius:999px;font-size:12px;white-space:nowrap}
+.layout{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:0 24px 80px;display:grid;grid-template-columns:260px minmax(0,1fr);gap:42px;align-items:start}
+.toc{position:sticky;top:24px;border:1px solid var(--border);background:var(--panel);backdrop-filter:blur(14px);border-radius:16px;padding:18px;max-height:calc(100vh - 48px);overflow:auto}
+.toc h2{font-size:11px;text-transform:uppercase;letter-spacing:.16em;color:var(--muted);margin:0 0 12px}
+.toc a{display:block;color:var(--muted);text-decoration:none;font-size:13px;padding:5px 0 5px 10px;border-left:2px solid transparent}
+.toc a:hover{color:var(--text);border-left-color:var(--accent)}
+main{min-width:0}
+main h1{display:none}
+main h2{font-size:27px;line-height:1.2;letter-spacing:-.02em;margin:48px 0 16px;padding-top:18px;border-top:1px solid var(--border);scroll-margin-top:24px}
+main h3{font-size:19px;margin:28px 0 10px;scroll-margin-top:24px}
+main p{color:#c8d3e6}
+main a{color:var(--accent)}
+main code{background:rgba(94,234,212,.09);color:#b8fff4;padding:2px 5px;border-radius:5px;font-size:.9em}
+main pre{background:#05080e;border:1px solid var(--border);border-radius:12px;padding:16px;overflow:auto;line-height:1.5}
+main pre code{background:none;padding:0;color:#c9d6ea}
+.table-wrap{overflow:auto;border:1px solid var(--border);border-radius:12px;margin:18px 0}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{padding:10px 12px;border-bottom:1px solid var(--border);text-align:left;vertical-align:top}
+th{background:rgba(255,255,255,.04);color:#dce7f8;font-weight:600}
+tr:last-child td{border-bottom:none}
+blockquote{margin:18px 0;padding:12px 16px;border-left:3px solid var(--accent2);background:rgba(129,140,248,.08);border-radius:0 10px 10px 0;color:#c8d3e6}
+hr{border:none;border-top:1px solid var(--border);margin:36px 0}
+footer{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:24px;color:var(--muted);font-size:13px;border-top:1px solid var(--border)}
+footer a{color:var(--accent)}
+@keyframes float{0%,100%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(22px,-32px,0) scale(1.08)}}
+@media(max-width:900px){.layout{grid-template-columns:1fr;gap:24px}.toc{display:none}.hero{padding:36px 20px 24px}h1{font-size:38px}.lede{font-size:16px}.chips{margin-top:18px}.layout{padding:0 20px 60px}main h2{margin-top:32px}}
+</style>
+</head>
+<body data-app-ready="false">
+<div class="orb" style="width:440px;height:440px;background:#14b8a6;top:-140px;left:-110px"></div>
+<div class="orb" style="width:360px;height:360px;background:#6366f1;top:120px;right:-90px;animation-delay:-6s"></div>
+<div class="orb" style="width:320px;height:320px;background:#0ea5e9;bottom:-120px;left:42%;animation-delay:-12s"></div>
+<header class="hero">
+  <div class="eyebrow">TonyD2F / balls</div>
+  <h1>OpenCode Configuration Report</h1>
+  <p class="lede">A detailed audit of the OpenCode v2.2.5 agent configuration loaded by this session: permissions, agents, models, skills, runtime scripts, and CI behavior.</p>
+  <div class="chips">
+    <span class="chip">OpenCode v2.2.5</span>
+    <span class="chip">deepseek-v4.1-flash-free</span>
+    <span class="chip">7 agents</span>
+    <span class="chip">5 project skills</span>
+    <span class="chip">2026-11-01</span>
+  </div>
+</header>
+<div class="layout">
+  <aside class="toc"><h2>Contents</h2><a href="#section-1">1. Executive summary</a><a href="#section-2">2. Scope and method</a><a href="#section-3">3. Configuration sources</a><a href="#section-4">4. Effective permissions</a><a href="#section-5">5. Agents</a><a href="#section-6">6. Models, authentication, and fallback</a><a href="#section-7">7. Skills</a><a href="#section-8">8. Plugins and MCP</a><a href="#section-9">9. Environment and experimental flags</a><a href="#section-10">10. GitHub Actions workflow</a><a href="#section-11">11. Project runtime scripts</a><a href="#section-12">12. Security and permission posture</a><a href="#section-13">13. Findings</a><a href="#section-14">14. Recommendations</a><a href="#section-15">15. Appendix: file inventory</a><a href="#section-16">16. Appendix: configuration at a glance</a></aside>
+  <main id="report"><h1>OpenCode Configuration Report</h1>
+<p><strong>Report date:</strong> 2026-11-01 <br> <strong>Repository:</strong> <code>TonyD2F/balls</code> <br> <strong>Workspace:</strong> <code>/home/runner/work/balls/balls</code> <br> <strong>Branch:</strong> <code>opencode/41255970340</code> <br> <strong>GitHub run:</strong> <code>41255970340</code> (issue #1) <br> <strong>Agent runtime:</strong> OpenCode <code>v2.2.5</code> <br> <strong>Session:</strong> <code>ses_e6b885fd6ffemtM3vgN6AIZLnj</code> <br> <strong>Model:</strong> <code>opencode/deepseek-v4.1-flash-free</code> <br> <strong>Operating system:</strong> Ubuntu 26.04.1 LTS, Linux 7.0.0-1017-azure, x86_64 <br> <strong>Node.js:</strong> v24.22.1</p>
+<hr>
+<h2 id="section-1">1. Executive summary</h2>
+<p>This session is running on a <strong>minimal, global-only OpenCode configuration</strong>. There is no project-level <code>opencode.json</code>, no MCP server, no plugin, and no authenticated integration. The agent is functional, but several configuration problems reduce reproducibility and safety.</p>
+<p>The most important findings:</p>
+<ol><li><strong>The project instruction file is not being loaded.</strong> The repository contains <code>Agents.md</code> (lowercase <code>g</code>), but OpenCode looks for <code>AGENTS.md</code> (uppercase). On this case-sensitive Linux filesystem the file is invisible to OpenCode. The file is also untracked, so it would not exist in a fresh clone.</li><li><strong>The global <code>&quot;*&quot;: &quot;allow&quot;</code> rule is broader than the task needs.</strong> It overrides the built-in <code>.env</code> <code>ask</code> protection and makes shell, edit, web, and subagent access unrestricted by default. It also nullifies the built-in read-only postures of <code>plan</code>, <code>explore</code>, <code>summary</code>, and <code>title</code>, because global config rules are appended after built-in agent rules and the last matching rule wins.</li><li><strong><code>.env</code> protection is overridden.</strong> The built-in <code>.env</code> <code>ask</code> rules are base defaults; the global <code>&quot;*&quot;: &quot;allow&quot;</code> is appended after them, and last match wins. The run also uses <code>--auto</code>, which auto-approves anything not explicitly denied.</li><li><strong>The skill bundle is not versioned with the project.</strong> <code>.agents/</code> is git-ignored and is a nested Git checkout of <code>denaidark/skills</code>. A fresh clone of this repository will not contain the skills.</li><li><strong>Several skills are not runnable as-is.</strong> <code>mcp-duckgo</code> needs <code>uvx</code> (missing), <code>image-search</code> needs the Python <code>ddgs</code> package (missing), and <code>load-sketchfab-threejs</code> has no installed <code>node_modules</code>.</li><li><strong>The documented preview port is wrong.</strong> <code>Agents.md</code> says <code>http://localhost:3002</code>; the runtime uses <code>APP_PORT=3000</code>.</li></ol>
+<p>Overall: <strong>functional in this runner, but not reproducible from the repository and not safely constrained</strong>.</p>
+<hr>
+<h2 id="section-2">2. Scope and method</h2>
+<p>The report covers configuration actually loaded by this session, not upstream OpenCode defaults. Evidence was collected with:</p>
+<pre><code class="language-sh">opencode --version
+opencode debug config
+opencode debug agents
+opencode debug paths
+opencode mcp list
+opencode plugin list
+opencode models
+opencode auth list
+
+git status --short
+git ls-files
+git check-ignore -v .agents
+git -C .agents remote -v
+
+sqlite3 ~/.local/share/opencode/opencode.db \
+  &quot;select * from instruction_entry;&quot;
+sqlite3 ~/.local/share/opencode/opencode.db \
+  &quot;select * from instruction_blob;&quot;</code></pre>
+<p>Permission ordering was confirmed both from <code>opencode debug agents</code> on v2.2.5 and from the upstream v2 sources (<code>packages/core/src/config/plugin/agent.ts</code> appends global rules; <code>packages/core/src/permission.ts</code> evaluates with <code>findLast</code>).</p>
+<p>Secret values were redacted. The report includes only secret <strong>names</strong>, never values.</p>
+<hr>
+<h2 id="section-3">3. Configuration sources</h2>
+<h3>3.1 <code>opencode debug config</code></h3>
+<p>Only one configuration document is loaded:</p>
+<pre><code class="language-json">[
+  {
+    &quot;type&quot;: &quot;document&quot;,
+    &quot;path&quot;: &quot;/home/runner/.config/opencode/opencode.json&quot;,
+    &quot;info&quot;: {
+      &quot;$schema&quot;: &quot;https://opencode.ai/config.json&quot;,
+      &quot;permissions&quot;: [
+        { &quot;action&quot;: &quot;*&quot;, &quot;resource&quot;: &quot;*&quot;, &quot;effect&quot;: &quot;allow&quot; },
+        { &quot;action&quot;: &quot;subagent&quot;, &quot;resource&quot;: &quot;*&quot;, &quot;effect&quot;: &quot;allow&quot; }
+      ],
+      &quot;plugins&quot;: []
+    }
+  },
+  { &quot;type&quot;: &quot;directory&quot;, &quot;path&quot;: &quot;/home/runner/.config/opencode&quot; },
+  { &quot;type&quot;: &quot;directory&quot;, &quot;path&quot;: &quot;/home/runner/.opencode&quot; }
+]</code></pre>
+<h3>3.2 Source inventory</h3>
+<div class="table-wrap"><table><thead><tr><th>Layer</th><th>Path</th><th>Present</th><th>Loaded / effect</th></tr></thead><tbody><tr><td>Global config</td><td><code>/home/runner/.config/opencode/opencode.json</code></td><td>yes</td><td>Only config document</td></tr><tr><td>Global config dir</td><td><code>/home/runner/.config/opencode</code></td><td>yes</td><td>Scanned</td></tr><tr><td>Global data dir</td><td><code>/home/runner/.opencode</code></td><td>yes</td><td>Scanned</td></tr><tr><td>Project config</td><td><code>/home/runner/work/balls/balls/opencode.json</code></td><td>no</td><td>No project overrides</td></tr><tr><td>Project config dir</td><td><code>/home/runner/work/balls/balls/.opencode</code></td><td>no</td><td>None</td></tr><tr><td>Project instructions</td><td><code>/home/runner/work/balls/balls/AGENTS.md</code></td><td>no</td><td>Not found</td></tr><tr><td>Actual instruction file</td><td><code>/home/runner/work/balls/balls/Agents.md</code></td><td>yes</td><td><strong>Not loaded (case mismatch)</strong></td></tr><tr><td>Project skills</td><td><code>/home/runner/work/balls/balls/.agents/skills</code></td><td>yes</td><td>5 skills loaded</td></tr><tr><td>Global skills</td><td><code>~/.config/opencode/skill(s)</code>, <code>~/.opencode/skill(s)</code></td><td>no</td><td>None</td></tr><tr><td>Global instructions</td><td><code>~/.config/opencode/AGENTS.md</code>, <code>~/AGENTS.md</code></td><td>no</td><td>None</td></tr><tr><td>Runtime instructions</td><td><code>/home/runner/work/_temp/omgithub-runtime/AGENTS.md</code></td><td>yes</td><td>Outside workspace, not loaded</td></tr></tbody></table></div>
+<h3>3.3 Instruction-file defect</h3>
+<p>OpenCode's server log subscribes to these instruction paths:</p>
+<pre><code class="language-text">/home/runner/work/balls/balls/AGENTS.md
+/home/runner/work/balls/AGENTS.md
+/home/runner/AGENTS.md
+/home/runner/.config/opencode/AGENTS.md</code></pre>
+<p>None of those exist. The only project instruction file is:</p>
+<pre><code class="language-text">/home/runner/work/balls/balls/Agents.md   (1,081 bytes)</code></pre>
+<p>Evidence that its contents were not loaded:</p>
+<ul><li><code>instruction_blob</code> contains only the core Code Mode, skill-guidance, date, and environment blobs.</li><li>A search for <code>Process lifecycle</code> in <code>instruction_blob</code> returns <code>0</code> rows.</li><li>The session's <code>instruction_entry</code> table is empty.</li><li><code>git status</code> shows <code>?? Agents.md</code>, so the file is untracked and would not survive a fresh checkout.</li></ul>
+<p><strong>Impact:</strong> the agent does not receive the intended process-lifecycle rules or the Linux browser/WebGPU capture rules.</p>
+<h3>3.4 Global config file</h3>
+<p><code>/home/runner/.config/opencode/opencode.json</code>:</p>
+<pre><code class="language-json">{
+  &quot;$schema&quot;: &quot;https://opencode.ai/config.json&quot;,
+  &quot;plugin&quot;: [],
+  &quot;permission&quot;: {
+    &quot;*&quot;: &quot;allow&quot;,
+    &quot;task&quot;: &quot;allow&quot;
+  }
+}</code></pre>
+<p>Notes:</p>
+<ul><li>The file is mode <code>600</code> (owner-only), which is appropriate.</li><li><code>permission</code> and <code>task</code> are V1-era names. OpenCode v2 translates them to <code>permissions</code>, <code>shell</code>, and <code>subagent</code>; the debug output confirms this conversion.</li><li><code>plugin</code> is also a deprecated V1 key; v2 uses <code>plugins</code>.</li><li>The config contains no <code>model</code>, <code>provider</code>, <code>agent</code>, <code>instructions</code>, <code>mcp</code>, or <code>command</code> entries.</li><li>No secrets are stored in this file.</li></ul>
+<hr>
+<h2 id="section-4">4. Effective permissions</h2>
+<h3>4.1 Rule ordering</h3>
+<p>OpenCode v2 evaluates permission rules <strong>in order, last match wins</strong>. The effective order is base policy, built-in agent rules, global config rules, then agent-specific config rules. The debug output for <code>build</code> shows this order:</p>
+<pre><code class="language-text">1. *            *        allow    (base policy)
+2. read         *.env    ask      (base policy)
+3. read         *.env.*  ask      (base policy)
+4. read         *.env.example allow
+5. question     *        allow    (build agent)
+6. *            *        allow    (global config)
+7. subagent     *        allow    (global config: &quot;task&quot;: &quot;allow&quot;)
+8. browser      *        deny     (agent default)
+9. skill        browser  deny</code></pre>
+<p>Because rule 6 is a broad <code>allow</code> appended after the <code>.env</code> <code>ask</code> rules, <strong>the <code>.env</code> protection is overridden</strong>. The later <code>browser: deny</code> remains effective because it comes after rule 6.</p>
+<p>The CLI invocation is:</p>
+<pre><code class="language-text">opencode run --auto --server http://127.0.0.1:41093 \
+  --model opencode/deepseek-v4.1-flash-free --format json ...</code></pre>
+<p><code>--auto</code> auto-approves any request that is not explicitly denied. Even if the <code>.env</code> rule were not shadowed, it would be auto-approved in this run.</p>
+<h3>4.2 Built-in agents after the global override</h3>
+<div class="table-wrap"><table><thead><tr><th>Agent</th><th>Built-in intent</th><th>Effect after global <code>*: allow</code></th></tr></thead><tbody><tr><td><code>build</code></td><td>Default executor; browser denied</td><td>Everything allowed except browser</td></tr><tr><td><code>plan</code></td><td>Read-only; edits denied except <code>~/.opencode/plan/*</code></td><td><strong>Edits allowed</strong> — read-only restriction overridden</td></tr><tr><td><code>explore</code></td><td>Read/search only; subagents denied</td><td><strong>All tools allowed</strong> — restriction overridden</td></tr><tr><td><code>general</code></td><td>Questions/subagents denied</td><td><strong>Subagents allowed</strong> — restriction overridden</td></tr><tr><td><code>compaction</code></td><td>Base policy</td><td>Everything allowed except browser</td></tr><tr><td><code>summary</code></td><td>Denies all actions</td><td><strong>Everything allowed</strong> except browser</td></tr><tr><td><code>title</code></td><td>Denies all actions</td><td><strong>Everything allowed</strong> except browser</td></tr></tbody></table></div>
+<p>This is the practical consequence of the global allow-all rule: the built-in safety postures of <code>plan</code>, <code>explore</code>, <code>summary</code>, and <code>title</code> do not survive the merge.</p>
+<h3>4.3 What the agent can do</h3>
+<ul><li>Run arbitrary shell commands as the <code>runner</code> user.</li><li>Read and edit any file the user can write.</li><li>Read environment variables, including CI secrets, via shell.</li><li>Fetch and search the web.</li><li>Spawn subagents without restriction.</li><li>Use <code>playwright-cli</code> through the shell even though the <code>browser</code> tool is denied.</li></ul>
+<p>The only hard denial in the effective policy is the <code>browser</code> tool and the <code>browser</code> skill.</p>
+<hr>
+<h2 id="section-5">5. Agents</h2>
+<p><code>opencode debug agents</code> lists seven built-in agents:</p>
+<div class="table-wrap"><table><thead><tr><th>ID</th><th>Name</th><th>Mode</th><th>Hidden</th><th>Description</th></tr></thead><tbody><tr><td><code>build</code></td><td>Build</td><td>primary</td><td>no</td><td>Default agent; executes tools</td></tr><tr><td><code>plan</code></td><td>Plan</td><td>primary</td><td>no</td><td>Read-only exploration and planning</td></tr><tr><td><code>explore</code></td><td>Explore</td><td>subagent</td><td>no</td><td>Fast codebase search</td></tr><tr><td><code>general</code></td><td>General</td><td>subagent</td><td>no</td><td>Multi-step research and execution</td></tr><tr><td><code>compaction</code></td><td>Compaction</td><td>primary</td><td>yes</td><td>Context compaction</td></tr><tr><td><code>summary</code></td><td>Summary</td><td>primary</td><td>yes</td><td>Session summarization</td></tr><tr><td><code>title</code></td><td>Title</td><td>primary</td><td>yes</td><td>Session title generation</td></tr></tbody></table></div>
+<p>No custom agents are defined. No agent has an explicit model, temperature, variant, or tool allowlist. The session uses the default <code>build</code> agent; the session database records <code>agent</code> as null and the model as <code>{&quot;id&quot;:&quot;deepseek-v4.1-flash-free&quot;,&quot;providerID&quot;:&quot;opencode&quot;}</code>.</p>
+<hr>
+<h2 id="section-6">6. Models, authentication, and fallback</h2>
+<h3>6.1 Available models</h3>
+<p><code>opencode models</code> returns eight free OpenCode Zen models:</p>
+<pre><code class="language-text">opencode/beam-free
+opencode/big-pickle
+opencode/deepseek-v4.1-flash-free
+opencode/flint-40b-free
+opencode/glm-5.3-flash-free
+opencode/mimo-v2.6-flash-free
+opencode/nemotron-3.5-lightning-free
+opencode/nemotron-3.5-super-vl-free</code></pre>
+<h3>6.2 Selected model</h3>
+<p>The selected model comes from the issue label:</p>
+<pre><code class="language-text">model/opencode/deepseek-v4.1-flash-free</code></pre>
+<p>and is passed on the CLI by the runtime wrapper. It is <strong>not</strong> set in <code>opencode.json</code>.</p>
+<h3>6.3 Runtime fallback chain</h3>
+<p><code>run-with-model-fallback.mjs</code> defines this preferred order:</p>
+<pre><code class="language-text">opencode/deepseek-v4.1-flash-free
+opencode/glm-5.3-flash-free
+opencode/mimo-v2.6-flash-free
+opencode/big-pickle</code></pre>
+<p>If <code>OPENROUTER_API_KEY</code> is set, it appends:</p>
+<pre><code class="language-text">openrouter/cohere/north-mini-code:free</code></pre>
+<p>It retries on HTTP <code>429</code>, <code>500</code>, <code>502</code>, <code>503</code>, <code>504</code> and on provider errors such as <code>provider.free-limit</code>, <code>provider.rate-limit</code>, <code>provider.overloaded</code>, and <code>provider.model-not-found</code>. This fallback behavior is outside OpenCode configuration; a local run without the wrapper will not have it.</p>
+<h3>6.4 Authentication</h3>
+<p><code>opencode auth list</code> reports:</p>
+<pre><code class="language-text">No authenticated integrations</code></pre>
+<p>The model is authenticated through the <code>OPENCODE_API_KEY</code> environment variable (redacted). <code>OPENCODE_AUTH_CONTENT</code> is empty, so there is no injected auth JSON. <code>OPENROUTER_API_KEY</code> is also present in the environment (redacted) but is not an OpenCode integration.</p>
+<p>Free-model usage limits are per egress IP, not per account. A <code>FreeUsageLimitError</code> 429 should be treated as local to the runner, not as an account-wide quota.</p>
+<hr>
+<h2 id="section-7">7. Skills</h2>
+<h3>7.1 Project skills</h3>
+<p>The project provides five skills under <code>.agents/skills</code>:</p>
+<div class="table-wrap"><table><thead><tr><th>Skill</th><th>Size</th><th>Purpose</th><th>Runtime readiness</th></tr></thead><tbody><tr><td><code>gauntlet-loop</code></td><td>12K</td><td>Builder/critic iteration prompt</td><td>Prompt-only; ready</td></tr><tr><td><code>image-search</code></td><td>24K</td><td>DuckDuckGo image search</td><td><strong>Not ready: <code>ddgs</code> Python package missing</strong></td></tr><tr><td><code>load-sketchfab-threejs</code></td><td>1.2M</td><td>Sketchfab download, GLB normalization, Three.js/PlayCanvas A/B viewer</td><td><strong>Not ready: <code>node_modules</code> not installed</strong></td></tr><tr><td><code>mcp-duckgo</code></td><td>8K</td><td>DuckDuckGo MCP via <code>mcporter</code></td><td><strong>Not ready: <code>uvx</code> missing</strong></td></tr><tr><td><code>opencode-zen-completions</code></td><td>16K</td><td>OpenCode Zen completions API</td><td>Ready; no local dependency</td></tr></tbody></table></div>
+<p>The session also exposes two built-in skills:</p>
+<div class="table-wrap"><table><thead><tr><th>Skill</th><th>Source</th><th>Purpose</th></tr></thead><tbody><tr><td><code>opencode</code></td><td>Built-in</td><td>OpenCode self-help and configuration guidance</td></tr><tr><td><code>report</code></td><td>Built-in</td><td>Diagnostics collection and GitHub issue reporting</td></tr></tbody></table></div>
+<p><code>image-search</code> declares <code>user-invocable: false</code> and an <code>allowed-tools</code> list (<code>Read</code>, <code>Write</code>, <code>Edit</code>, <code>Bash</code>).</p>
+<h3>7.2 Discovery</h3>
+<p>The server watches:</p>
+<pre><code class="language-text">/home/runner/work/balls/balls/.agents/skills</code></pre>
+<p>The loaded skill metadata confirms the five project skills. Global skill locations are watched but do not exist.</p>
+<h3>7.3 Provenance</h3>
+<p><code>.agents/README.md</code> documents the imports:</p>
+<ul><li><code>mcp-duckgo</code> — <code>aahl/skills</code></li><li><code>image-search</code> — <code>z0gsh1u/oh-my-writing-skill</code></li><li><code>gauntlet-loop</code> — <code>robonuggets/gauntlet-loop</code></li><li><code>load-sketchfab-threejs</code> — local asset workflow</li><li><code>opencode-zen-completions</code> — local skill</li></ul>
+<p>Third-party licenses are preserved under <code>.agents/third-party-licenses/</code>.</p>
+<h3>7.4 Version-control problem</h3>
+<p><code>.agents/</code> is ignored by <code>.gitignore</code> line 8 and is itself a Git repository:</p>
+<pre><code class="language-text">remote: https://github.com/denaidark/skills
+HEAD:   646a42c Initial public snapshot of shared OpenCode skills</code></pre>
+<p>The parent repository tracks only:</p>
+<pre><code class="language-text">.github/workflows/opencode.yml
+README.md</code></pre>
+<p>So the skills are <strong>runtime-provisioned, not project-versioned</strong>. A fresh clone or a different runner will not have them unless the same provisioning step is repeated.</p>
+<h3>7.5 Dependency checks</h3>
+<div class="table-wrap"><table><thead><tr><th>Command</th><th>Status</th><th>Consequence</th></tr></thead><tbody><tr><td><code>npx</code></td><td>available</td><td><code>mcporter</code> can be fetched on demand</td></tr><tr><td><code>uvx</code></td><td><strong>missing</strong></td><td><code>mcp-duckgo</code> command fails before MCP starts</td></tr><tr><td><code>mcporter</code></td><td>missing</td><td>Must be fetched via <code>npx -y</code></td></tr><tr><td>Python <code>ddgs</code></td><td><strong>missing</strong></td><td><code>image-search</code> exits with an install message</td></tr><tr><td>Python <code>requests</code></td><td>available</td><td>Fine</td></tr><tr><td><code>node_modules</code> in <code>load-sketchfab-threejs</code></td><td><strong>missing</strong></td><td>Its <code>.mjs</code> tools cannot import dependencies</td></tr><tr><td><code>blender</code></td><td>missing</td><td>Not required by the current scripts, but relevant for 3D workflows</td></tr></tbody></table></div>
+<p><code>image-search</code> was invoked with <code>--help</code>; it exits <code>1</code> with:</p>
+<pre><code class="language-text">错误: 请先安装 ddgs 库
+运行: pip install ddgs</code></pre>
+<hr>
+<h2 id="section-8">8. Plugins and MCP</h2>
+<div class="table-wrap"><table><thead><tr><th>Item</th><th>Result</th></tr></thead><tbody><tr><td>Plugins</td><td><code>opencode plugin list</code> → “No plugins found”</td></tr><tr><td>MCP servers</td><td><code>opencode mcp list</code> → “No MCP servers configured”</td></tr></tbody></table></div>
+<p><code>mcp-duckgo</code> is not an OpenCode MCP server. It shells out to an external MCP server through <code>mcporter</code>, so <code>opencode mcp list</code> remains empty even if that skill is used.</p>
+<p>No MCP tools, resources, or templates are available to the agent through OpenCode itself.</p>
+<hr>
+<h2 id="section-9">9. Environment and experimental flags</h2>
+<p>The following OpenCode-related variables are set (secret values redacted):</p>
+<div class="table-wrap"><table><thead><tr><th>Variable</th><th>Value</th><th>Meaning</th></tr></thead><tbody><tr><td><code>OPENCODE</code></td><td><code>1</code></td><td>Running under OpenCode</td></tr><tr><td><code>AI_AGENT</code></td><td><code>opencode</code></td><td>Agent identity</td></tr><tr><td><code>OPENCODE_API_KEY</code></td><td><code>&lt;redacted&gt;</code></td><td>Model/provider credential</td></tr><tr><td><code>OPENCODE_AUTH_CONTENT</code></td><td><em>(empty)</em></td><td>No injected auth JSON</td></tr><tr><td><code>OPENCODE_ENABLE_EXA</code></td><td><code>true</code></td><td>Exa search enabled</td></tr><tr><td><code>OPENCODE_ENABLE_EXPERIMENTAL_MODELS</code></td><td><code>true</code></td><td>Experimental model catalog</td></tr><tr><td><code>OPENCODE_EXPERIMENTAL</code></td><td><code>true</code></td><td>Experimental features</td></tr><tr><td><code>OPENCODE_EXPERIMENTAL_BACKGROUND_SUBAGENTS</code></td><td><code>true</code></td><td>Background subagents</td></tr><tr><td><code>OPENCODE_EXPERIMENTAL_WEBSOCKETS</code></td><td><code>true</code></td><td>WebSocket transport</td></tr><tr><td><code>OPENCODE_EXPERIMENTAL_WORKSPACES</code></td><td><code>true</code></td><td>Workspace features</td></tr><tr><td><code>OPENCODE_PASSWORD</code></td><td><code>&lt;redacted&gt;</code></td><td>Local service authentication</td></tr><tr><td><code>OPENCODE_SESSION_ID</code></td><td><code>ses_e6b885fd6ffemtM3vgN6AIZLnj</code></td><td>Current session</td></tr><tr><td><code>OPENCODE_TERMINAL</code></td><td><code>1</code></td><td>Terminal mode</td></tr><tr><td><code>OPENCODE_WEB_DIR</code></td><td><code>/home/runner/work/_temp/omgithub-web</code></td><td>Web/runtime state</td></tr><tr><td><code>OPENCODE_WEB_PORT</code></td><td><code>41093</code></td><td>Web server port</td></tr><tr><td><code>APP_PORT</code></td><td><code>3000</code></td><td>Preview app port</td></tr><tr><td><code>RUNTIME_DIR</code></td><td><code>/home/runner/work/_temp/omgithub-runtime</code></td><td>Runtime scripts</td></tr></tbody></table></div>
+<p>Additional CI variables include <code>GH_TOKEN</code>, <code>OMGITHUB_CALLBACK_TOKEN</code>, and <code>ACTIONS_ID_TOKEN_REQUEST_TOKEN</code> (all redacted), plus the standard <code>GITHUB_*</code> context variables.</p>
+<p>Implications:</p>
+<ul><li>All experimental features are enabled. Behavior may differ from a stable OpenCode build.</li><li>Background subagents are enabled, which is relevant to fan-out workflows.</li><li>The agent can read all of these values through the shell unless permissions are tightened.</li></ul>
+<hr>
+<h2 id="section-10">10. GitHub Actions workflow</h2>
+<p><code>/.github/workflows/opencode.yml</code> is the only tracked automation file besides <code>README.md</code>.</p>
+<h3>10.1 Triggers</h3>
+<ul><li><code>issues: types: [opened]</code></li><li><code>workflow_dispatch</code> with a required <code>issue_number</code> input</li></ul>
+<p>The <code>prepare</code> job runs when the event is <code>workflow_dispatch</code> or when an opened issue contains the <code>OpenCode</code> label.</p>
+<h3>10.2 Permissions</h3>
+<p>Workflow-level:</p>
+<pre><code class="language-yaml">permissions: {}</code></pre>
+<p>Job-level:</p>
+<div class="table-wrap"><table><thead><tr><th>Job</th><th>Permissions</th></tr></thead><tbody><tr><td><code>prepare</code></td><td><code>contents: write</code>, <code>id-token: write</code>, <code>issues: write</code>, <code>actions: write</code></td></tr><tr><td><code>opencode</code></td><td><code>contents: write</code>, <code>id-token: write</code>, <code>issues: write</code>, <code>actions: read</code>, <code>pull-requests: write</code></td></tr></tbody></table></div>
+<p>The top-level empty permission set is good practice: each job receives only what it needs.</p>
+<h3>10.3 Concurrency</h3>
+<pre><code class="language-yaml">concurrency:
+  group: opencode-issue-${{ github.repository }}-${{ github.event.issue.number || inputs.issue_number }}
+  cancel-in-progress: false</code></pre>
+<p>Runs for the same issue are serialized rather than cancelled.</p>
+<h3>10.4 Reusable workflows and pinning</h3>
+<p>Both jobs call reusable workflows from <code>denaidark/OhMyGithub</code>, pinned to:</p>
+<pre><code class="language-text">78b3c5fe33e3db4dda59a2c15d07c9f4a2fd5779</code></pre>
+<p><code>runtime_ref</code> is pinned to the same commit. This is a strong supply-chain practice.</p>
+<h3>10.5 Secrets</h3>
+<p>The reusable workflow receives:</p>
+<ul><li><code>OPENCODE_API_KEY</code></li><li><code>OPENCODE_AUTH_JSON</code></li><li><code>AGENTSWEB_SSH_PUBLIC_KEY</code></li><li><code>OPENROUTER_API_KEY</code></li></ul>
+<p>No secret values are present in the repository.</p>
+<hr>
+<h2 id="section-11">11. Project runtime scripts</h2>
+<h3>11.1 Scripts</h3>
+<div class="table-wrap"><table><thead><tr><th>File</th><th>Tracked</th><th>Behavior</th></tr></thead><tbody><tr><td><code>start.sh</code></td><td>no</td><td><code>node &quot;$RUNTIME_DIR/scripts/default-start.mjs&quot;</code> under <code>/usr/bin/time -p</code></td></tr><tr><td><code>capture.sh</code></td><td>no</td><td><code>node &quot;$RUNTIME_DIR/scripts/default-capture.mjs&quot;</code> under <code>/usr/bin/time -p</code></td></tr><tr><td><code>startup.sh</code></td><td>no</td><td>No-op; only <code>set -euo pipefail</code></td></tr></tbody></table></div>
+<p><code>RUNTIME_DIR</code> is set to <code>/home/runner/work/_temp/omgithub-runtime</code>, so the scripts are runnable in this runner. They are generated scaffolding, not committed project code.</p>
+<h3>11.2 <code>default-start.mjs</code></h3>
+<ul><li>Accepts a Vite project (<code>package.json</code> with <code>vite</code>), rejects Next.js, or serves a static <code>index.html</code>.</li><li>Runs <code>npm ci</code>/<code>npm install</code> and <code>vite build --base ./</code> when needed.</li><li>Serves static files with an SSE live-reload endpoint at <code>/__omgithub/live</code>.</li><li>Listens on <code>process.env.PORT || 3000</code>.</li><li>Writes <code>deployment-output.json</code> when <code>OPENCODE_WEB_DIR</code> is set.</li><li>Supports <code>.glb</code> and <code>.wasm</code> MIME types.</li></ul>
+<p>The workspace currently has no <code>index.html</code> and no <code>package.json</code>, so <code>start.sh</code> would fail with “No generated index.html or supported package project” until the application is scaffolded.</p>
+<h3>11.3 <code>default-capture.mjs</code></h3>
+<ul><li>Loads Playwright from <code>~/.local/share/omgithub-playwright</code>.</li><li>Reads <code>linux.json</code> on Linux.</li><li>Uses the persistent Xvfb display.</li><li>Requires <code>CAPTURE_URL</code> and <code>CAPTURE_DIR</code>.</li><li>Captures:</li><li>desktop <code>1440x900</code> → <code>final-desktop.png</code></li><li>mobile <code>390x844</code> → <code>final-mobile.png</code></li><li>Waits for fonts, optionally auto-clicks a start control, and waits 1 second.</li><li>With <code>CAPTURE_STRICT=1</code>, fails on page errors or same-origin HTTP <code>&gt;= 400</code>.</li><li>Uses exit code <code>75</code> for transient failures.</li></ul>
+<h3>11.4 Browser/WebGPU settings</h3>
+<p><code>~/.local/share/omgithub-playwright/linux.json</code>:</p>
+<pre><code class="language-json">{
+  &quot;outputDir&quot;: &quot;/home/runner/.local/share/omgithub-playwright/output&quot;,
+  &quot;browser&quot;: {
+    &quot;browserName&quot;: &quot;chromium&quot;,
+    &quot;launchOptions&quot;: {
+      &quot;channel&quot;: &quot;chromium&quot;,
+      &quot;headless&quot;: false,
+      &quot;args&quot;: [
+        &quot;--enable-gpu&quot;,
+        &quot;--ignore-gpu-blocklist&quot;,
+        &quot;--enable-unsafe-webgpu&quot;,
+        &quot;--use-angle=vulkan&quot;,
+        &quot;--enable-features=Vulkan&quot;,
+        &quot;--use-vulkan=swiftshader&quot;,
+        &quot;--use-webgpu-adapter=swiftshader&quot;,
+        &quot;--disable-vulkan-surface&quot;
+      ]
+    }
+  }
+}</code></pre>
+<p>This is <strong>SwiftShader CPU software rendering</strong>, not hardware GPU acceleration. Any performance or visual claim must say so.</p>
+<h3>11.5 Port mismatch</h3>
+<ul><li><code>Agents.md</code> says: <code>http://localhost:3002</code></li><li>Runtime: <code>APP_PORT=3000</code>, <code>PORT=&quot;${APP_PORT:-3000}&quot;</code></li><li><code>start.sh</code> inherits <code>PORT</code>, so the default is <code>3000</code>.</li></ul>
+<p>The instruction file is currently not loaded, so the mismatch is latent, but it will become an active bug once the filename is fixed.</p>
+<hr>
+<h2 id="section-12">12. Security and permission posture</h2>
+<h3>12.1 Strengths</h3>
+<ul><li>Global config and service state are mode <code>600</code>.</li><li>The workflow pins reusable actions to a commit SHA.</li><li>Workflow-level permissions are empty; job permissions are scoped.</li><li>No secrets are stored in <code>opencode.json</code> or the repository.</li><li><code>browser</code> and <code>skill: browser</code> are denied.</li></ul>
+<h3>12.2 Weaknesses</h3>
+<ul><li>Global <code>*: allow</code> makes shell, edit, web, and subagent access unrestricted.</li><li>Built-in read-only agents are overridden by the global rule.</li><li><code>.env</code> <code>ask</code> rules are shadowed by the later global allow.</li><li><code>--auto</code> auto-approves non-denied requests.</li><li><code>external_directory</code> defaults to allow; the agent can read outside the workspace.</li><li>The <code>browser</code> denial is only a tool-level control; <code>playwright-cli</code> remains reachable through the shell.</li><li><code>.env</code> files are not in <code>.gitignore</code>.</li><li><code>.agents/</code> contains third-party executable content, including a vendored browser extension, and is not tracked or reviewed with the project.</li></ul>
+<h3>12.3 Secret exposure</h3>
+<p>The agent process can read all CI secrets through the shell environment. The configuration does not add any deny rule for:</p>
+<ul><li><code>.env</code> files</li><li><code>~/.ssh/*</code></li><li><code>~/.config/gh/*</code></li><li>cloud credential files</li><li>the OpenCode database or service state</li></ul>
+<p>This is expected in a trusted ephemeral runner, but it should be explicit rather than accidental.</p>
+<hr>
+<h2 id="section-13">13. Findings</h2>
+<div class="table-wrap"><table><thead><tr><th>ID</th><th>Severity</th><th>Finding</th><th>Evidence</th><th>Impact</th></tr></thead><tbody><tr><td>F1</td><td><strong>P1</strong></td><td>Project instructions are not loaded</td><td><code>Agents.md</code> vs <code>AGENTS.md</code>; watcher log; empty <code>instruction_entry</code>; zero matches for <code>Process lifecycle</code></td><td>Agent misses process/browser rules</td></tr><tr><td>F2</td><td><strong>P1</strong></td><td>Global allow-all nullifies read-only agents</td><td><code>opencode debug agents</code> shows <code>plan</code>'s <code>edit * deny</code> and <code>explore</code>'s <code>* deny</code> <strong>before</strong> the global <code>* allow</code>; <code>Permission.evaluate</code> uses <code>findLast</code></td><td><code>plan</code> can edit, <code>explore</code> can use denied tools</td></tr><tr><td>F3</td><td><strong>P1</strong></td><td><code>.env</code> protection is ineffective</td><td><code>.env</code> asks precede the global allow; <code>--auto</code> also auto-approves</td><td>Secrets may be read without a hard boundary</td></tr><tr><td>F4</td><td><strong>P1</strong></td><td>Skills are not versioned with the project</td><td><code>.agents/</code> ignored; nested repo <code>denaidark/skills</code></td><td>Fresh clones/other runners lack skills</td></tr><tr><td>F5</td><td><strong>P2</strong></td><td>No project-level config</td><td><code>opencode debug config</code> shows only global file</td><td>Behavior not reproducible from repo</td></tr><tr><td>F6</td><td><strong>P2</strong></td><td>Skill dependencies missing</td><td><code>uvx</code>, <code>ddgs</code>, <code>node_modules</code> missing</td><td>Skills fail at runtime</td></tr><tr><td>F7</td><td><strong>P2</strong></td><td>Port mismatch</td><td><code>Agents.md</code> says 3002; <code>APP_PORT=3000</code></td><td>Wrong URL after filename fix</td></tr><tr><td>F8</td><td><strong>P2</strong></td><td>Runtime scripts are untracked</td><td><code>start.sh</code>, <code>capture.sh</code>, <code>startup.sh</code> are <code>??</code></td><td>Non-reproducible setup; <code>startup.sh</code> is a no-op</td></tr><tr><td>F9</td><td><strong>P3</strong></td><td>Experimental flags all enabled</td><td>Six <code>OPENCODE_EXPERIMENTAL*</code> variables</td><td>Reduced reproducibility</td></tr><tr><td>F10</td><td><strong>P3</strong></td><td>Model selection is CLI/label-only</td><td>No <code>model</code> in config; label drives CLI</td><td>Local runs lose fallback/model intent</td></tr><tr><td>F11</td><td><strong>P3</strong></td><td>No MCP/plugins/auth integrations</td><td>CLI reports none</td><td>Limited tool surface; external skills bridge the gap</td></tr><tr><td>F12</td><td><strong>P3</strong></td><td><code>.env</code> not git-ignored</td><td><code>.gitignore</code> has no <code>.env</code> rule</td><td>Accidental secret commit risk</td></tr></tbody></table></div>
+<hr>
+<h2 id="section-14">14. Recommendations</h2>
+<h3>14.1 Fix the instruction filename (highest priority)</h3>
+<pre><code class="language-sh">mv Agents.md AGENTS.md
+git add AGENTS.md
+git commit -m &quot;Add AGENTS.md for OpenCode&quot;</code></pre>
+<p>Then verify with:</p>
+<pre><code class="language-sh">opencode debug config</code></pre>
+<p>The file should be watched as <code>.../AGENTS.md</code>, and its text should appear in the session's instructions.</p>
+<h3>14.2 Add a project-level <code>opencode.json</code></h3>
+<p>Create <code>/home/runner/work/balls/balls/opencode.json</code> so model and permission intent are reviewable:</p>
+<pre><code class="language-json">{
+  &quot;$schema&quot;: &quot;https://opencode.ai/config.json&quot;,
+  &quot;model&quot;: &quot;opencode/deepseek-v4.1-flash-free&quot;,
+  &quot;permissions&quot;: [
+    { &quot;action&quot;: &quot;*&quot;, &quot;resource&quot;: &quot;*&quot;, &quot;effect&quot;: &quot;allow&quot; },
+    { &quot;action&quot;: &quot;read&quot;, &quot;resource&quot;: &quot;*.env&quot;, &quot;effect&quot;: &quot;deny&quot; },
+    { &quot;action&quot;: &quot;read&quot;, &quot;resource&quot;: &quot;*.env.*&quot;, &quot;effect&quot;: &quot;deny&quot; },
+    { &quot;action&quot;: &quot;read&quot;, &quot;resource&quot;: &quot;*.env.example&quot;, &quot;effect&quot;: &quot;allow&quot; },
+    { &quot;action&quot;: &quot;read&quot;, &quot;resource&quot;: &quot;~/.ssh/*&quot;, &quot;effect&quot;: &quot;deny&quot; },
+    { &quot;action&quot;: &quot;read&quot;, &quot;resource&quot;: &quot;~/.config/gh/*&quot;, &quot;effect&quot;: &quot;deny&quot; },
+    { &quot;action&quot;: &quot;edit&quot;, &quot;resource&quot;: &quot;.git/*&quot;, &quot;effect&quot;: &quot;deny&quot; },
+    { &quot;action&quot;: &quot;shell&quot;, &quot;resource&quot;: &quot;rm -rf *&quot;, &quot;effect&quot;: &quot;deny&quot; }
+  ]
+}</code></pre>
+<p>Because rules are last-match-wins, the specific denies must come after the broad allow. Validate the result with:</p>
+<pre><code class="language-sh">opencode debug config
+opencode debug agents</code></pre>
+<p>If you want <code>plan</code> and <code>explore</code> to remain read-only, add explicit <strong>agent-specific</strong> permission rules. Global config rules are appended after the built-in agent rules, but agent-specific config rules are appended after the global rules, so they win.</p>
+<h3>14.3 Make the skills reproducible</h3>
+<p>Choose one:</p>
+<ol><li><strong>Vendor them:</strong> remove the nested <code>.agents/.git</code>, remove <code>.agents/</code> from <code>.gitignore</code>, and commit the skills with their licenses.</li><li><strong>Submodule:</strong> add <code>denaidark/skills</code> as a real submodule at <code>.agents/</code>.</li><li><strong>Provision explicitly:</strong> keep them runtime-provided and document the provisioning step in <code>README.md</code> and <code>AGENTS.md</code>.</li></ol>
+<p>For a CI-driven project, option 1 or 2 is preferable.</p>
+<h3>14.4 Install or replace missing skill dependencies</h3>
+<ul><li>Install <code>uv</code>/<code>uvx</code> in the runner image, or change <code>mcp-duckgo</code> to a command that exists.</li><li>Add <code>pip install ddgs</code> (or a project setup step) for <code>image-search</code>.</li><li>Run <code>npm install</code> in <code>load-sketchfab-threejs</code> before using its <code>.mjs</code> tools.</li><li>Add a small <code>scripts/check-skills.sh</code> that verifies each skill's declared dependencies before a run.</li></ul>
+<h3>14.5 Align the preview port</h3>
+<p>Either:</p>
+<pre><code class="language-sh">export APP_PORT=3002</code></pre>
+<p>or change <code>Agents.md</code> to:</p>
+<pre><code class="language-text">http://localhost:3000</code></pre>
+<p>Pick one and keep the instruction, runtime, and docs consistent.</p>
+<h3>14.6 Track or generate the runtime scripts</h3>
+<p>If <code>start.sh</code>, <code>capture.sh</code>, and <code>startup.sh</code> are part of the project contract, commit them. If they are generated, add a deterministic generation step and document it. <code>startup.sh</code> currently does nothing; either implement it or remove it.</p>
+<h3>14.7 Tighten permissions deliberately</h3>
+<p>The current allow-all policy is fine only if the runner is fully trusted and ephemeral. For anything else:</p>
+<ul><li>Deny reads of <code>.env</code>, <code>.ssh</code>, <code>.config/gh</code>, cloud credentials, and the OpenCode database.</li><li>Deny edits to <code>.git/</code>.</li><li>Ask before shell commands, with narrow allows for <code>git status</code>, <code>git diff</code>, and project build commands.</li><li>Keep <code>browser</code> denied unless a task explicitly needs it.</li><li>Remember that <code>playwright-cli</code> is still reachable through the shell; the browser tool denial is not a sandbox.</li></ul>
+<h3>14.8 Reduce experimental surface</h3>
+<p>Enable only the experimental flags the workflow needs. In particular, <code>OPENCODE_EXPERIMENTAL</code>, <code>OPENCODE_EXPERIMENTAL_BACKGROUND_SUBAGENTS</code>, <code>OPENCODE_EXPERIMENTAL_WEBSOCKETS</code>, and <code>OPENCODE_EXPERIMENTAL_WORKSPACES</code> all change runtime behavior.</p>
+<h3>14.9 Add a configuration check</h3>
+<p>Add a small CI check that runs:</p>
+<pre><code class="language-sh">opencode debug config
+opencode debug agents</code></pre>
+<p>and fails if the expected project config or <code>AGENTS.md</code> is missing. This catches the case-sensitivity problem before an agent run starts.</p>
+<hr>
+<h2 id="section-15">15. Appendix: file inventory</h2>
+<h3>Tracked</h3>
+<pre><code class="language-text">.github/workflows/opencode.yml
+README.md</code></pre>
+<h3>Untracked</h3>
+<pre><code class="language-text">.gitignore
+Agents.md
+capture.sh
+start.sh
+startup.sh</code></pre>
+<h3>Ignored / nested</h3>
+<pre><code class="language-text">.agents/        (nested Git repo: denaidark/skills @ 646a42c)</code></pre>
+<h3>Not present</h3>
+<pre><code class="language-text">AGENTS.md
+opencode.json
+index.html
+package.json
+node_modules/</code></pre>
+<hr>
+<h2 id="section-16">16. Appendix: configuration at a glance</h2>
+<div class="table-wrap"><table><thead><tr><th>Metric</th><th>Value</th></tr></thead><tbody><tr><td>Config documents loaded</td><td>1</td></tr><tr><td>Project config files</td><td>0</td></tr><tr><td>Agents</td><td>7 (4 visible primaries/subagents, 3 hidden)</td></tr><tr><td>Project skills</td><td>5</td></tr><tr><td>Built-in skills</td><td>2</td></tr><tr><td>MCP servers</td><td>0</td></tr><tr><td>Plugins</td><td>0</td></tr><tr><td>Authenticated integrations</td><td>0</td></tr><tr><td>Available models</td><td>8 free OpenCode models</td></tr><tr><td>Project instruction files loaded</td><td>0</td></tr><tr><td>Effective permission default</td><td>allow-all</td></tr><tr><td>Browser tool</td><td>denied</td></tr><tr><td>Preview port</td><td>3000 (docs say 3002)</td></tr><tr><td>Browser renderer</td><td>SwiftShader CPU software</td></tr></tbody></table></div>
+<hr>
+<p><em>End of report.</em></p></main>
+</div>
+<footer>Generated from <a href="/CONFIGURATION_REPORT.md">CONFIGURATION_REPORT.md</a> · static build · <span id="build-note">OpenCode configuration audit</span></footer>
+<script>
+  const markReady = () => requestAnimationFrame(() => {
+    document.body.dataset.appReady = 'true';
+    window.__APP_READY__ = true;
+  });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(markReady, markReady);
+  else markReady();
+  window.addEventListener('load', markReady, { once: true });
+</script>
+</body>
+</html>
