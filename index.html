@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#080b16">
+  <meta name="description" content="A bright, fast arcade game about collecting light and dodging the dark.">
+  <title>Last Light — Balls</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <a class="wordmark" href="#" aria-label="Last Light home"><span class="brand-orb"></span> LAST<span class="light">LIGHT</span></a>
+      <div class="top-meta"><span class="live-dot"></span> ARCADE / 001</div>
+      <button class="sound-button" id="soundButton" aria-label="Toggle sound" title="Toggle sound">♫ <span>SOUND ON</span></button>
+    </header>
+
+    <section class="game-layout" aria-label="Last Light arcade game">
+      <aside class="side-copy">
+        <p class="eyebrow">A LITTLE GAME OF SURVIVAL</p>
+        <h1>Keep the<br><em>light alive.</em></h1>
+        <p class="intro">Gather the drifting sparks. Stay clear of the void. Every second gets a little brighter—and a little faster.</p>
+        <div class="howto">
+          <div class="howto-row"><span class="key">←</span><span class="key">→</span><span>MOVE</span></div>
+          <div class="howto-row"><span class="key wide">SPACE</span><span>DASH · 3 SEC COOLDOWN</span></div>
+          <div class="howto-row"><span class="key">P</span><span>PAUSE</span></div>
+        </div>
+        <div class="best-card"><span class="best-icon">✳</span><div><small>PERSONAL BEST</small><strong id="bestScore">000000</strong></div><span class="best-unit">PTS</span></div>
+      </aside>
+
+      <div class="game-column">
+        <div class="hud">
+          <div class="hud-item score-item"><span class="hud-label">SCORE</span><strong id="score">000000</strong></div>
+          <div class="hud-item center-hud"><span class="hud-label">SURVIVAL TIME</span><strong id="time">00:00</strong></div>
+          <div class="hud-item lives-item"><span class="hud-label">SHIELDS</span><strong id="lives" aria-label="3 shields">● ● ●</strong></div>
+        </div>
+        <div class="canvas-wrap" id="canvasWrap">
+          <canvas id="game" aria-label="Game field. Move to collect golden sparks and avoid red hazards."></canvas>
+          <div class="screen" id="screen">
+            <div class="screen-card">
+              <div class="screen-mark" id="screenMark">✳</div>
+              <p class="eyebrow" id="screenEyebrow">READY WHEN YOU ARE</p>
+              <h2 id="screenTitle">Find your<br><em>way through.</em></h2>
+              <p class="screen-copy" id="screenCopy">Collect sparks to score. Three hits and the light goes out.</p>
+              <button class="primary-button" id="playButton"><span id="playLabel">START GAME</span><span class="button-arrow">↗</span></button>
+              <div class="screen-hint" id="screenHint">ARROW KEYS OR A / D TO MOVE</div>
+            </div>
+          </div>
+          <div class="game-corner corner-tl"></div><div class="game-corner corner-tr"></div><div class="game-corner corner-bl"></div><div class="game-corner corner-br"></div>
+        </div>
+        <footer class="game-footer"><span><i class="status-pip"></i><span id="statusText">SYSTEM STANDBY</span></span><span>LIGHT IS A LIMITED RESOURCE <b>✳</b></span></footer>
+      </div>
+    </section>
+    <footer class="page-footer"><span>AN EXPERIMENT IN STAYING A LITTLE LONGER.</span><span>BUILT FOR THE CURIOUS <b>✦</b></span></footer>
+  </main>
+  <script src="game.js"></script>
+</body>
+</html>
